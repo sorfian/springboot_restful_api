@@ -5,6 +5,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import sorfian.springboot_restful_api.entity.User;
+import sorfian.springboot_restful_api.model.UserResponse;
 import sorfian.springboot_restful_api.service.UserService;
 import sorfian.springboot_restful_api.model.RegisterUserRequest;
 import sorfian.springboot_restful_api.model.WebResponse;
@@ -22,6 +24,11 @@ public class UserController {
     public WebResponse<String> register(@RequestBody RegisterUserRequest request) {
         userService.register(request);
         return WebResponse.<String>builder().data("OK").build();
+    }
+
+    public WebResponse<UserResponse> get(User user) {
+        UserResponse userResponse = userService.get(user);
+        return  WebResponse.<UserResponse>builder().data(userResponse).build();
     }
 
 }

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
+import sorfian.springboot_restful_api.model.UserResponse;
 import sorfian.springboot_restful_api.repository.UserRepository;
 import sorfian.springboot_restful_api.security.BCrypt;
 import sorfian.springboot_restful_api.model.RegisterUserRequest;
@@ -40,5 +41,12 @@ public class UserService {
         user.setName(request.getName());
 
         userRepository.save(user);
+    }
+
+    public UserResponse get(User user) {
+        return  UserResponse.builder()
+                .username(user.getUsername())
+                .name(user.getName())
+                .build();
     }
 }
